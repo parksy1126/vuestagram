@@ -9,7 +9,7 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
  
-  <Container />
+  <ContainerView :instardata=instardata />
 
   <div class="footer">
     <ul class="footer-button-plus"> 
@@ -21,11 +21,19 @@
 
 <script>
 
+import ContainerView from './components/ContainerView.vue'
+
+import instardata from './assets/instardata.js'
 
 export default {
   name: 'App',
   components: {
-    
+    ContainerView
+  },
+  data() {
+    return {
+      instardata : instardata,
+    }
   }
 }
 </script>
