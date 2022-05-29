@@ -1,15 +1,13 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile"></div>
+      <div class="profile" :style="{backgroundImage : 'url($(instar.postImage))'}"></div>
       <span class="profile-name">{{instar.name}}</span>
     </div>
-    <div class="post-body">
-      {{instar.content}}
-    </div>
+    <div class="post-body" :style="instar.postImage"></div>
     <div class="post-content">
       <p>{{instar.likes}} Likes</p>
-      <p><strong>글쓴이아이디</strong> 임시내용</p>
+      <p><strong>{{instar.name}}</strong> {{instar.content}}</p>
       <p class="date">{{instar.date}}</p>
     </div>
   </div> 
