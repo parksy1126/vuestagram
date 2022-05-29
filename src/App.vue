@@ -12,7 +12,7 @@
   <Container />
 
   <div class="footer">
-    <ul class="footer-button-plus">
+    <ul class="footer-button-plus"> 
       <input type="file" id="file" class="inputfile" />
       <label for="file" class="input-plus">+</label>
     </ul>
