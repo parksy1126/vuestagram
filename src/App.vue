@@ -4,19 +4,30 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++;">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
  
-  <ContainerView :instardata=instardata />
+  <ContainerView :instardata="instardata2" :step="step" :imageUrl="imageUrl" />
+
+  <button @click="getPostData">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus"> 
-      <input type="file" id="file" class="inputfile" />
+      <input type="file" id="file" class="inputfile" @change="fnImageUpload"/>
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
+
+  <!-- <div v-if="tabState == 0">내용0</div>
+  <div v-if="tabState == 1">내용1</div>
+  <div v-if="tabState == 2">내용2</div>
+  <button @click="tabState = 0">버튼0</button>
+  <button @click="tabState = 1">버튼1</button>
+  <button @click="tabState = 2">버튼2</button>
+  <div style="margin-top : 20px;"></div> -->
+
 </template>
 
 <script>
@@ -25,6 +36,8 @@ import ContainerView from './components/ContainerView.vue'
 
 import instardata from './assets/instardata.js'
 
+import axios from 'axios';
+
 export default {
   name: 'App',
   components: {
@@ -32,9 +45,36 @@ export default {
   },
   data() {
     return {
-      instardata : instardata,
+      instardata2 : instardata,
+      clickcount : 0,
+      tabState : 0,
+      step : 0,
+      imageUrl : '',
     }
-  }
+  },
+  methods : {
+    getPostData() {
+      axios.get('https://codingapple1.github.io/vue/more'+this.clickcount+'.json'
+      ).then(res =>{
+        //console.log(res);  
+        console.log(this.instardata2);  
+        this.instardata2.push(res.data);
+        this.clickcount = this.clickcount+1;
+      }).catch( err =>{
+        console.log(err);
+      })
+
+    },
+    fnImageUpload(e){
+      console.log('------- 파일업로드');
+      console.log(e.target.files);
+      var files = e.target.files;
+      this.imageUrl = URL.createObjectURL(files[0]);
+      console.log(this.imageUrl);
+      this.step = 1;
+
+    }
+  },
 }
 </script>
 
