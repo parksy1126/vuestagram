@@ -1,10 +1,10 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" :style="{backgroundImage : 'url($(instar.postImage))'}"></div>
+      <div class="profile" :style="{backgroundImage : 'url($(instar.userImage))'}"></div>
       <span class="profile-name">{{instar.name}}</span>
     </div>
-    <div class="post-body" :style="instar.postImage"></div>
+    <div class="post-body" :style="{backgroundImage : 'url($(instar.postImage))'}"></div>
     <div class="post-content">
       <p>{{instar.likes}} Likes</p>
       <p><strong>{{instar.name}}</strong> {{instar.content}}</p>

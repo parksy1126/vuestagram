@@ -9,7 +9,9 @@
     <img src="./assets/logo.png" class="logo" />
   </div>
  
-  <ContainerView :instardata=instardata />
+  <ContainerView :instardata=instardata2 />
+
+  <button @click="getPostData">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus"> 
@@ -25,6 +27,8 @@ import ContainerView from './components/ContainerView.vue'
 
 import instardata from './assets/instardata.js'
 
+import axios from 'axios';
+
 export default {
   name: 'App',
   components: {
@@ -32,7 +36,22 @@ export default {
   },
   data() {
     return {
-      instardata : instardata,
+      instardata2 : instardata,
+      clickcount : 0,
+    }
+  },
+  methods : {
+    getPostData() {
+      axios.get('https://codingapple1.github.io/vue/more'+this.clickcount+'.json'
+      ).then(res =>{
+        //console.log(res);  
+        console.log(this.instardata2);  
+        this.instardata2.push(res.data);
+        this.clickcount = this.clickcount+1;
+      }).catch( err =>{
+        console.log(err);
+      })
+
     }
   }
 }
