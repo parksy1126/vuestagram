@@ -4,21 +4,30 @@
       <li>Cancel</li>
     </ul>
     <ul class="header-button-right">
-      <li>Next</li>
+      <li @click="step++;">Next</li>
     </ul>
     <img src="./assets/logo.png" class="logo" />
   </div>
  
-  <ContainerView :instardata=instardata2 />
+  <ContainerView :instardata="instardata2" :step="step" :imageUrl="imageUrl" />
 
   <button @click="getPostData">더보기</button>
 
   <div class="footer">
     <ul class="footer-button-plus"> 
-      <input type="file" id="file" class="inputfile" />
+      <input type="file" id="file" class="inputfile" @change="fnImageUpload"/>
       <label for="file" class="input-plus">+</label>
     </ul>
  </div>
+
+  <!-- <div v-if="tabState == 0">내용0</div>
+  <div v-if="tabState == 1">내용1</div>
+  <div v-if="tabState == 2">내용2</div>
+  <button @click="tabState = 0">버튼0</button>
+  <button @click="tabState = 1">버튼1</button>
+  <button @click="tabState = 2">버튼2</button>
+  <div style="margin-top : 20px;"></div> -->
+
 </template>
 
 <script>
@@ -38,6 +47,9 @@ export default {
     return {
       instardata2 : instardata,
       clickcount : 0,
+      tabState : 0,
+      step : 0,
+      imageUrl : '',
     }
   },
   methods : {
@@ -52,8 +64,17 @@ export default {
         console.log(err);
       })
 
+    },
+    fnImageUpload(e){
+      console.log('------- 파일업로드');
+      console.log(e.target.files);
+      var files = e.target.files;
+      this.imageUrl = URL.createObjectURL(files[0]);
+      console.log(this.imageUrl);
+      this.step = 1;
+
     }
-  }
+  },
 }
 </script>
 

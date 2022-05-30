@@ -17,7 +17,7 @@
 export default {
   name: 'PostView',
   props: {
-    instar : Object
+    instar : Object,
   },
   
 }
